@@ -18,7 +18,7 @@ class _HelpState extends State<Help> {
             'Help',
           ),
           centerTitle: true,
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: Colors.blueGrey,
         ),
         body: Column(
           children: [
@@ -40,7 +40,29 @@ class _HelpState extends State<Help> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
-                  "\nAnda dapat melihat Data Anggota Kelompok 9 dengan memilih menu Data Kelompok pada halaman Menu Utama.\n\n\n"),
+                  "\nAnda dapat melihat Data Anggota Kelompok kami dengan memilih menu Data Kelompok pada halaman Menu Utama.\n\n\n"),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Text(
+                "\nMenggunakan Stopwatch\n",
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Text(
+                  "Anda dapat mengukur waktu Anda sendiri dengan aplikasi Stopwatch ini.\n"
+                  "\t\t1. Menghitung waktu maju dari nol\n"
+                  "\t\t\t\t\t- Pada Menu Utama, tekan menu Stopwatch.\n"
+                  "\t\t\t\t\t- Tekan tombol 'start' berwarna biru untuk memulai pengukuran waktu.\n"
+                  "\t\t2. Menghitung waktu tanpa menghentikan penghitungan\n"
+                  "\t\t\t\t\t- Tekan tombol tambah '+' berwarna biru untuk merekam waktu tanpa menghentikan penghitungan\n"
+                  "\t\t3. Menghentikan stopwatch yang berjalan\n"
+                  "\t\t\t\t\t- Untuk menghentikan stopwatch yang berjalan, tekan tombol 'jeda' berwarna merah\n"
+                  "\t\t4. Mengulang waktu perhitungan\n"
+                  "\t\t\t\t\t- Untuk mereset stopwatch, tekan tombol 'reset' berwarna hijau"),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -58,7 +80,7 @@ class _HelpState extends State<Help> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
-                "\nMenggunakan Stopwatch\n",
+                "Melihat Daftar Favorite\n",
                 textAlign: TextAlign.justify,
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
               ),
@@ -66,14 +88,8 @@ class _HelpState extends State<Help> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
-                  "Anda dapat mengukur waktu Anda sendiri dengan aplikasi Stopwatch ini.\n"
-                  "\t\t1. Menghitung waktu maju dari nol\n"
-                  "\t\t\t\t\t- Pada Menu Utama, ketuk menu Stopwatch.\n"
-                  "\t\t\t\t\t- Ketuk Mulai.\n"
-                  "\t\t2. Mengubah stopwatch yang berjalan\n"
-                  "\t\t\t\t\t- Untuk menjeda stopwatch yang berjalan, ketuk Jeda\n"
-                  "\t\t\t\t\t- Untuk mereset stopwatch, ketuk Jeda Lalu Reset."),
-            )
+                  "Anda dapat melihat Daftar Situs Favorite dengan memilih menu Daftar Favorite pada halaman Menu Utama\n\n"),
+            ),
           ],
         ),
       ),

@@ -1,6 +1,23 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Stopwatch App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Countdown(),
+    );
+  }
+}
+
 class Countdown extends StatefulWidget {
   const Countdown({Key? key}) : super(key: key);
 
@@ -9,47 +26,41 @@ class Countdown extends StatefulWidget {
 }
 
 class _CountdownState extends State<Countdown> {
-  // Initialize an instance of Stopwatch
   final Stopwatch _stopwatch = Stopwatch();
-
-  // Timer
   late Timer _timer;
-
-  // The result which will be displayed on the screen
   String _result = '00:00:00';
+  List<String> _lapTimes = [];
 
-  // This function will be called when the user presses the Start button
   void _start() {
-    // Timer.periodic() will call the callback function every 100 milliseconds
     _timer = Timer.periodic(const Duration(milliseconds: 30), (Timer t) {
-      // Update the UI
       setState(() {
-        // result in hh:mm:ss format
         _result =
-        '${_stopwatch.elapsed.inMinutes.toString().padLeft(
-            2, '0')}:${(_stopwatch.elapsed.inSeconds % 60).toString().padLeft(
-            2, '0')}:${(_stopwatch.elapsed.inMilliseconds % 100)
-            .toString()
-            .padLeft(2, '0')}';
+        '${_stopwatch.elapsed.inMinutes.toString().padLeft(2, '0')}:${(_stopwatch.elapsed.inSeconds % 60).toString().padLeft(2, '0')}:${(_stopwatch.elapsed.inMilliseconds % 100).toString().padLeft(2, '0')}';
       });
     });
-    // Start the stopwatch
     _stopwatch.start();
   }
 
-  // This function will be called when the user presses the Stop button
   void _stop() {
     _timer.cancel();
     _stopwatch.stop();
   }
 
-  // This function will be called when the user presses the Reset button
   void _reset() {
-    _stop();
     _stopwatch.reset();
+    setState(() {
+      _result = '00:00:00';
+      _lapTimes.clear();
+    });
+    _timer.cancel();
+  }
 
-    // Update the UI
-    setState(() {});
+  void _lap() {
+    if (_stopwatch.isRunning) {
+      setState(() {
+        _lapTimes.insert(0, _result);
+      });
+    }
   }
 
   @override
@@ -60,51 +71,90 @@ class _CountdownState extends State<Countdown> {
           "Stopwatch",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 30,
+            fontSize: 24,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.blueGrey,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Display the result
             Text(
               _result,
-              style: const TextStyle(
-                fontSize: 50.0,
+              style: TextStyle(
+                fontSize: 72.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
             ),
-            const SizedBox(
-              height: 20.0,
-            ),
+            SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // Start button
                 ElevatedButton(
                   onPressed: _start,
-                  child: const Text('Start'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blue,
+                    onPrimary: Colors.white,
+                    padding: EdgeInsets.all(20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(color: Colors.blue),
+                    ),
+                  ),
+                  child: Icon(Icons.play_arrow), // Ikon Play
                 ),
-                // Stop button
                 ElevatedButton(
                   onPressed: _stop,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
+                    primary: Colors.red,
+                    onPrimary: Colors.white,
+                    padding: EdgeInsets.all(20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(color: Colors.red),
+                    ),
                   ),
-                  child: const Text('Stop'),
+                  child: Icon(Icons.stop), // Ikon Stop
                 ),
-                // Reset button
                 ElevatedButton(
                   onPressed: _reset,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    primary: Colors.green,
+                    onPrimary: Colors.white,
+                    padding: EdgeInsets.all(20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(color: Colors.green),
+                    ),
                   ),
-                  child: const Text('Reset'),
+                  child: Icon(Icons.refresh), // Ikon Reset
+                ),
+                FloatingActionButton(
+                  onPressed: _lap,
+                  backgroundColor: Colors.blue,
+                  child: Icon(Icons.add, color: Colors.white),
                 ),
               ],
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _lapTimes.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(
+                      'Lap ${index + 1}',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(_lapTimes[index]),
+                  );
+                },
+              ),
             ),
           ],
         ),

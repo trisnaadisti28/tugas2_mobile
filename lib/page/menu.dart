@@ -4,6 +4,8 @@ import 'package:tugas_materi_1/kelompok.dart';
 import 'package:tugas_materi_1/stopwatch.dart';
 import 'package:tugas_materi_1/rekomendasi.dart';
 import 'package:tugas_materi_1/login.dart';
+import 'package:tugas_materi_1/favorit.dart';
+import 'package:tugas_materi_1/data.dart';
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -13,6 +15,8 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
+  int jumlahFavorit = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +74,40 @@ class _MenuState extends State<Menu> {
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return Hobi();
+                                return Countdown();
+                              }));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(20),
+                          child: Center(
+                              child: Column(children: [
+                                Icon(
+                                  Icons.timer,
+                                  size: 70,
+                                  color: Colors.blueGrey,
+                                ),
+                                Text(
+                                  "Stopwatch",
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ])),
+                        ),
+                      )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.white),
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return Rekomendasi();
                           }));
                         },
                         child: Container(
@@ -101,29 +138,33 @@ class _MenuState extends State<Menu> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.white),
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return Countdown();
+                          final favoritList = ListRekomendasi.where((situs) => situs.fav).toList();
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return FavoritePage(favoritList: favoritList);
                           }));
                         },
-                        child: Container(
-                          padding: EdgeInsets.all(20),
-                          child: Center(
-                              child: Column(children: [
-                            Icon(
-                              Icons.timer,
-                              size: 70,
-                              color: Colors.blueGrey,
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(20),
+                              child: Center(
+                                  child: Column(children: [
+                                Icon(
+                                  Icons.favorite,
+                                  size: 70,
+                                  color: Colors.blueGrey,
+                                ),
+                                Text(
+                                  "Favorite",
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ])),
                             ),
-                            Text(
-                              "Stopwatch",
-                              style: TextStyle(
-                                color: Colors.black87,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ])),
+                          ],
                         ),
                       )),
                 ),

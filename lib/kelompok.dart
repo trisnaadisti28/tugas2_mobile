@@ -19,7 +19,6 @@ class kelompok extends State<Kelompok> {
           "Data Kelompok",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 30,
           ),
         ),
         centerTitle: true,
@@ -31,19 +30,23 @@ class kelompok extends State<Kelompok> {
             child: Column(
               children: <Widget>[
                 Text(
-                  "Kelompok 9",
+                  "Meet Us!",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 36,
                   ),
                 ),
                 SizedBox(height: 50),
-                Image.asset(
-                  "assets/images/Disti.jpg",
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.fitWidth,
+                ClipOval(
+                  child: Image.asset(
+                    "assets/images/Disti.jpg",
+                    height: 150,
+                    width: 150,
+                    fit: BoxFit
+                        .cover, // Anda bisa mengganti ini sesuai dengan kebutuhan
+                  ),
                 ),
+                SizedBox(height: 10),
                 Text(
                   '124200038 - Trisna Adisti',
                   textAlign: TextAlign.left,
@@ -51,13 +54,17 @@ class kelompok extends State<Kelompok> {
                     fontSize: 17,
                   ),
                 ),
-                SizedBox(height: 20),
-                Image.asset(
-                  "assets/images/Hasna.jpg",
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.fitWidth,
+                SizedBox(height: 40),
+                ClipOval(
+                  child: Image.asset(
+                    "assets/images/Hasna.jpg",
+                    height: 150,
+                    width: 150,
+                    fit: BoxFit
+                        .cover, // Anda bisa mengganti ini sesuai dengan kebutuhan
+                  ),
                 ),
+                SizedBox(height: 10),
                 Text(
                   '124200060 - Hasna Luthfiana Fadhila',
                   textAlign: TextAlign.left,

@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                         enabled: true,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: "Email",
+                          hintText: "Masukkan Email Anda",
                           label: Text("Email"),
                         ),
                       ),
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText: true,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: "Password",
+                          hintText: "Masukkan Password Anda",
                           label: Text("Password"),
                         ),
                       ),

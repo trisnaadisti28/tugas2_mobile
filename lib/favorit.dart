@@ -1,24 +1,23 @@
+import 'package:flutter/material.dart';
 import 'package:tugas_materi_1/data.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/material.dart';
 
-class Rekomendasi extends StatefulWidget {
-  const Rekomendasi({Key? key}) : super(key: key);
+class FavoritePage extends StatefulWidget {
+  final List<RekomendasiList> favoritList;
+
+  FavoritePage({required this.favoritList});
 
   @override
-  State<Rekomendasi> createState() => RecomendasiState();
+  _FavoritePageState createState() => _FavoritePageState();
 }
 
-class RecomendasiState extends State<Rekomendasi> {
-  final Set<String> likedSites = Set<String>();
-
+class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          "Daftar Situs Rekomendasi",
+          "Favorit",
           style: TextStyle(
             color: Colors.white,
           ),
@@ -27,9 +26,9 @@ class RecomendasiState extends State<Rekomendasi> {
         backgroundColor: Colors.blueGrey,
       ),
       body: ListView.builder(
-        itemCount: ListRekomendasi.length,
+        itemCount: widget.favoritList.length,
         itemBuilder: (context, index) {
-          final RekomendasiList situs = ListRekomendasi[index];
+          final RekomendasiList situs = widget.favoritList[index];
           return InkWell(
             onTap: (){
               _launchUrl(situs.url);
@@ -62,6 +61,7 @@ class RecomendasiState extends State<Rekomendasi> {
                             msg = 'Berhasil Menambahkan ke Favorit';
                           } else {
                             msg = 'Berhasil Menghapus dari Favorit';
+                            widget.favoritList.remove(situs);
                           }
                         });
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -81,7 +81,24 @@ class RecomendasiState extends State<Rekomendasi> {
             ),
           );
         },
-      ),
+      )
+
+
+      // ListView.builder(
+      //   itemCount: widget.favoritList.length,
+      //   itemBuilder: (context, index) {
+      //     final RekomendasiList situs = widget.favoritList[index];
+      //     return ListTile(
+      //       onTap: () {
+      //         // Tambahkan logika untuk menavigasi ke halaman detail situs jika diperlukan.
+      //         // _navigateToDetailPage(situs);
+      //       },
+      //       leading: Image.network(situs.imageUrl),
+      //       title: Text(situs.title),
+      //       subtitle: Text(situs.url),
+      //     );
+      //   },
+      // ),
     );
   }
 
@@ -91,4 +108,5 @@ class RecomendasiState extends State<Rekomendasi> {
       throw Exception('Could not launch $_url');
     }
   }
+
 }
